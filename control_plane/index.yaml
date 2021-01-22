@@ -20,7 +20,7 @@ spec:
         app.kubernetes.io/name: service-example
     spec:
       containers:
-      - image: index.docker.io/dhasuda/service-example@sha256:6557fb38e5daac68abe8fe73030b3c87f54108d375e7a726d8c34746bd92eeb6
+      - image: index.docker.io/dhasuda/service-example@sha256:6cab84577e4d9978d44cc033bb253ab0cb0df375c91efddb1395f3ddab3fa8fd
         name: service-example
       serviceAccountName: service-example
 ---
