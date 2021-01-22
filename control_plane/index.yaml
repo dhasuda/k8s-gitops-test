@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: bazel-namespace
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-example
+  namespace: bazel-namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: service-example
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: service-example
+    spec:
+      containers:
+      - image: index.docker.io/dhasuda/service-example@sha256:6557fb38e5daac68abe8fe73030b3c87f54108d375e7a726d8c34746bd92eeb6
+        name: service-example
+      serviceAccountName: service-example
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-example
+  namespace: bazel-namespace
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app.kubernetes.io/name: service-example
+  type: ClusterIP
+
